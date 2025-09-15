@@ -1,0 +1,26 @@
+http:
+  # Add the router
+  routers:
+    router0:
+      entryPoints:
+      - web
+      service: httpbin
+      rule: PathPrefix(`/anything/`)
+
+  # Add the middleware
+  middlewares:
+    my-basic-auth:
+      basicAuth:
+        users:
+        - test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/
+        - test2:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0
+        usersFile: etc/traefik/.htpasswd
+
+  # Add the service
+  services:
+    httpbin:
+      loadBalancer:
+        servers:
+        - url: http://httpbin.org/
+        passHostHeader: false
+

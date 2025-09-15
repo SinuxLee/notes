@@ -1,0 +1,18 @@
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+log:
+  level: DEBUG
+  format: json
+
+entryPoints:
+  web:
+    address: :3080
+
+  websecure:
+    address: :3443
+
+providers:
+  file:
+    directory: "./conf"
+    watch: true
